@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Orchid from "./Orchid";
-import listOrchids from "../listOrchids";
+import listOrchids from "../data/listOrchids";
 function ListOrchid() {
   return (
     <Container className="py-5">

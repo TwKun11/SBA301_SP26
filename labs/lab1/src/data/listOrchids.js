@@ -1,4 +1,4 @@
-import Image from "../public/images/4n.jpg";
+import Image from "../../public/images/4n.jpg";
 
 export const OrchidsData = [
   {
