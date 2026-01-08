@@ -25,17 +25,19 @@ function Orchid({
 
   const priceText = price != null ? formatVND(price) : "";
 
+  const cardProps = {
+    orchidName,
+    shortDesc,
+    category,
+    isSpecial,
+    image,
+    priceText,
+    onDetail: () => setShowDetail(true),
+  };
+
   return (
     <>
-      <OrchidCard
-        orchidName={orchidName}
-        shortDesc={shortDesc}
-        category={category}
-        isSpecial={isSpecial}
-        image={image}
-        priceText={priceText}
-        onDetail={() => setShowDetail(true)}
-      />
+      <OrchidCard {...cardProps} />
 
       <Modal show={showDetail} onHide={() => setShowDetail(false)} centered>
         <Modal.Header closeButton>
