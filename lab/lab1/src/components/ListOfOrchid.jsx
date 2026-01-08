@@ -14,6 +14,7 @@ function ListOrchid() {
               category={orchid.category}
               isSpecial={orchid.isSpecial}
               image={orchid.image}
+              price={orchid.price}
             />
           </Col>
         ))}

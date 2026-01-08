@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from "react";
-import { Card, Badge, Button, Modal } from "react-bootstrap";
+import { Badge, Button, Modal } from "react-bootstrap";
+import OrchidCard from "./OrchidCard";
 
 function formatVND(value) {
-  return new Intl.NumberFormat("vi-VN").format(value) + "₫";
+  return new Intl.NumberFormat("vi-VN").format(value) + "đ";
 }
 
 function Orchid({
@@ -22,66 +23,19 @@ function Orchid({
       : description;
   }, [description]);
 
+  const priceText = price != null ? formatVND(price) : "";
+
   return (
     <>
-      <Card className="h-100 border-0 shadow-sm overflow-hidden">
-        <div style={{ position: "relative" }}>
-          <Card.Img
-            variant="top"
-            src={image}
-            alt={orchidName}
-            style={{ height: 210, objectFit: "cover" }}
-          />
-          {isSpecial && (
-            <Badge
-              bg="danger"
-              style={{
-                position: "absolute",
-                top: 10,
-                left: 10,
-                padding: "6px 10px",
-                borderRadius: 999,
-              }}
-            >
-              Best Seller
-            </Badge>
-          )}
-        </div>
-
-        <Card.Body className="d-flex flex-column">
-          <div className="d-flex justify-content-between align-items-start gap-2">
-            <Card.Title className="mb-1" style={{ fontSize: 18 }}>
-              {orchidName}
-            </Card.Title>
-            {price != null && (
-              <div className="fw-bold" style={{ whiteSpace: "nowrap" }}>
-                {formatVND(price)}
-              </div>
-            )}
-          </div>
-
-          <div className="text-muted mb-2" style={{ fontSize: 13 }}>
-            {category}
-          </div>
-
-          <Card.Text className="text-secondary mb-3" style={{ fontSize: 14 }}>
-            {shortDesc}
-          </Card.Text>
-
-          <div className="mt-auto d-flex gap-2">
-            <Button
-              variant="outline-primary"
-              size="sm"
-              onClick={() => setShowDetail(true)}
-            >
-              Xem chi tiết
-            </Button>
-            <Button variant="primary" size="sm">
-              Mua ngay
-            </Button>
-          </div>
-        </Card.Body>
-      </Card>
+      <OrchidCard
+        orchidName={orchidName}
+        shortDesc={shortDesc}
+        category={category}
+        isSpecial={isSpecial}
+        image={image}
+        priceText={priceText}
+        onDetail={() => setShowDetail(true)}
+      />
 
       <Modal show={showDetail} onHide={() => setShowDetail(false)} centered>
         <Modal.Header closeButton>
@@ -100,7 +54,7 @@ function Orchid({
 
           <div className="d-flex justify-content-between align-items-center mb-2">
             <div className="text-muted">{category}</div>
-            {price != null && <div className="fw-bold">{formatVND(price)}</div>}
+            {priceText && <div className="fw-bold">{priceText}</div>}
           </div>
 
           <p className="mb-0">{description}</p>
