@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Badge, Button, Modal } from "react-bootstrap";
-import OrchidCard from "./OrchidCard";
+import ConfirmModal from "./ConfirmModal";
 
 function formatVND(value) {
   return new Intl.NumberFormat("vi-VN").format(value) + "đ";
@@ -16,30 +16,30 @@ function Orchid({
 }) {
   const [showDetail, setShowDetail] = useState(false);
 
-  const shortDesc = useMemo(() => {
-    if (!description) return "";
-    return description.length > 80
+  const shortDesc = description
+    ? description.length > 80
       ? description.slice(0, 80) + "..."
-      : description;
-  }, [description]);
+      : description
+    : "";
 
   const priceText = price != null ? formatVND(price) : "";
 
-  const cardProps = {
-    orchidName,
-    shortDesc,
-    category,
-    isSpecial,
-    image,
-    priceText,
-    onDetail: () => setShowDetail(true),
-  };
+  const handleOpen = () => setShowDetail(true);
+  const handleClose = () => setShowDetail(false);
 
   return (
     <>
-      <OrchidCard {...cardProps} />
+      <ConfirmModal
+        orchidName={orchidName}
+        shortDesc={shortDesc}
+        category={category}
+        isSpecial={isSpecial}
+        image={image}
+        priceText={priceText}
+        onDetail={handleOpen}
+      />
 
-      <Modal show={showDetail} onHide={() => setShowDetail(false)} centered>
+      <Modal show={showDetail} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title className="d-flex align-items-center gap-2">
             {orchidName}
@@ -63,7 +63,7 @@ function Orchid({
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowDetail(false)}>
+          <Button variant="secondary" onClick={handleClose}>
             Đóng
           </Button>
           <Button variant="primary">Thêm vào giỏ</Button>

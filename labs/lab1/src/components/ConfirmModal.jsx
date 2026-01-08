@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Badge, Button } from "react-bootstrap";
 
-function OrchidCard({
+function ConfirmModal({
   orchidName,
   shortDesc,
   category,
@@ -68,4 +68,4 @@ function OrchidCard({
   );
 }
 
-export default OrchidCard;
+export default ConfirmModal;
