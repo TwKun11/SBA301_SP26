@@ -1,66 +1,34 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Header from "./components/Header";
 import Orchid from "./components/Orchid";
-
-const orchids = [
-  {
-    id: "1",
-    orchidName: "Ceasar 4N",
-    description: "Lorem ipsum dolor sit amet",
-    category: "Dendrobium",
-    isSpecial: true,
-    image: "images/4n.jpg",
-  },
-  {
-    id: "1",
-    orchidName: "Ceasar 4N",
-    description: "Lorem ipsum dolor sit amet",
-    category: "Dendrobium",
-    isSpecial: true,
-    image: "images/4n.jpg",
-  },
-  {
-    id: "1",
-    orchidName: "Ceasar 4N",
-    description: "Lorem ipsum dolor sit amet",
-    category: "Dendrobium",
-    isSpecial: true,
-    image: "images/4n.jpg",
-  },
-  {
-    id: "1",
-    orchidName: "Ceasar 4N",
-    description: "Lorem ipsum dolor sit amet",
-    category: "Dendrobium",
-    isSpecial: true,
-    image: "images/4n.jpg",
-  },
-];
+import Anh from "../public/images/4n.jpg";
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <Header />
+
       <main className="flex-fill py-4">
-        <div className="container text-center">
-          <h1 className="mb-4">Orchid Collection</h1>
-          <div className="row g-4">
-            {orchids.map((orchid) => (
-              <div className="col-12 col-sm-6 col-lg-3" key={orchid.id}>
-                <Orchid orchid={orchid} />
-              </div>
-            ))}
+        <div className="container">
+          <h1 className="text-center mb-4">WELCOME TO MY WEBSITE</h1>
+
+          <div className="row justify-content-center">
+            <div className="col-md-6 col-lg-4">
+              <Orchid
+                id="1"
+                orchidName="Ceasar 4N"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+                category="Dendrobium"
+                isSpecial={true}
+                image={Anh}
+              />
+            </div>
           </div>
         </div>
       </main>
 
-      <Footer
-        avatarUrl="https://i.pravatar.cc/100?img=33"
-        authorName="Tri"
-        role="Frontend Developer"
-        email="tritvv1@fpt.edu.vn"
-      />
+      <Footer avatar={Anh} name="Tri" email="tri@fpt.edu.vn" />
     </div>
   );
 }

@@ -1,26 +1,33 @@
-function Orchid({ orchid }) {
+import React from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
+
+function Orchid({ orchidName, description, category, isSpecial, image }) {
   return (
-    <article className="card shadow-sm">
-      <img
-        src={orchid.image}
-        className="card-img-top"
-        alt={orchid.orchidName}
-      />
-      <div className="card-body">
-        <h2 className="card-title h5 mb-2">{orchid.orchidName}</h2>
-        <p className="card-text">{orchid.description}</p>
-        <div className="d-flex flex-wrap gap-2">
-          <span className="badge text-bg-secondary">{orchid.category}</span>
-          {orchid.isSpecial && (
-            <span className="badge text-bg-success">Special</span>
-          )}
-          <span className="badge text-bg-light text-dark">
-            ID: {orchid.id}
-          </span>
-        </div>
-      </div>
-    </article>
+    <div>
+      <Container className="py-5">
+        <Row>
+          <Col>
+            <Card className="orchid-card">
+              <Card.Img variant="top" src={image} className="orchid-image" />
+
+              <Card.Body>
+                <Card.Title className="orchid-title">{orchidName}</Card.Title>
+
+                <Card.Subtitle className="orchid-category">
+                  {category}
+                </Card.Subtitle>
+
+                <Card.Text className="orchid-desc">{description}</Card.Text>
+
+                {isSpecial && (
+                  <span className="special-badge">Special Orchid</span>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }
-
 export default Orchid;
