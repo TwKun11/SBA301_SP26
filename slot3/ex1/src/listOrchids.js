@@ -1,4 +1,4 @@
-export const OrchidsData = [
+const OrchidsData = [
   {
     id: "1",
     orchidName: "Ceasar 4N",
@@ -73,3 +73,6 @@ export const OrchidsData = [
     image: "images/yellow.jpg",
   },
 ];
+
+export { OrchidsData };
+export default OrchidsData;
