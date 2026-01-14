@@ -1,49 +1,35 @@
-﻿import { NavLink, useLocation } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
 
-function Header({ searchTerm, onSearchChange }) {
-  const location = useLocation();
-  const showSearch = location.pathname === "/";
-
+function Header({ onSearch }) {
   return (
-    <nav className="navbar navbar-expand-lg bg-light navbar-light border-bottom shadow-sm">
-      <div className="container">
-        <div className="d-flex w-100 align-items-center gap-3">
-          <NavLink className="navbar-brand" to="/">
-            Demo
-          </NavLink>
-          <ul className="navbar-nav mx-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/">
-                Home
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/about">
-                About
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/contact">
-                Contact
-              </NavLink>
-            </li>
-          </ul>
-          <div className="ms-auto" style={{ width: 240 }}>
-            {showSearch ? (
-              <SearchBar
-                value={searchTerm}
-                onChange={onSearchChange}
-                placeholder="Search orchids..."
-                formClassName="w-100"
-              />
-            ) : (
-              <div className="w-100" style={{ height: 30 }} aria-hidden="true" />
-            )}
-          </div>
-        </div>
-      </div>
-    </nav>
+    <Navbar bg="light" variant="light" expand="lg" className="site-header">
+      <Container>
+        <Navbar.Brand as={Link} to="/">Orchid Shop</Navbar.Brand>
+
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/about">About</Nav.Link>
+            <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+          </Nav>
+
+          <Form className="d-flex">
+            <Form.Control
+              className="header-search"
+              type="search"
+              placeholder="Search orchid..."
+              onChange={(e) => onSearch(e.target.value)}
+            />
+          </Form>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 

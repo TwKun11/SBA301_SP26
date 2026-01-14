@@ -1,166 +1,126 @@
-﻿import { useState } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { useState } from "react";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import ConfirmModal from "../components/ConfirmModal";
 
-const initialForm = {
-  firstName: "",
-  lastName: "",
-  phone: "",
-  email: "",
-  agree: false,
-};
-
 function Contact() {
-  const [form, setForm] = useState(initialForm);
   const [validated, setValidated] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
+  const [show, setShow] = useState(false);
 
-  const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+    agree: false
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setForm({
+      ...form,
+      [name]: type === "checkbox" ? checked : value
+    });
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const formElement = event.currentTarget;
+    const formEl = event.currentTarget;
 
-    if (!formElement.checkValidity()) {
+    if (formEl.checkValidity() === false) {
+      event.preventDefault();
       event.stopPropagation();
-      setValidated(true);
-      return;
+    } else {
+      event.preventDefault();
+      setShow(true);
     }
 
     setValidated(true);
-    setShowConfirm(true);
-  };
-
-  const handleConfirm = () => {
-    setShowConfirm(false);
-    setForm(initialForm);
-    setValidated(false);
   };
 
   return (
-    <Container>
-      <Row className="justify-content-center">
-        <Col lg={8}>
-          <Card className="shadow-sm border-0">
-            <Card.Body className="p-4">
-              <h1 className="text-center mb-2">Contact</h1>
-              <p className="text-muted text-center mb-4">
-                Tell us about your needs and we will get back to you shortly.
-              </p>
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <Row className="mb-3">
-                  <Col md={6}>
-                    <Form.Group controlId="contactFirstName">
-                      <Form.Label>First name</Form.Label>
-                      <Form.Control
-                        required
-                        type="text"
-                        name="firstName"
-                        value={form.firstName}
-                        onChange={handleChange}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please enter your first name.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group controlId="contactLastName">
-                      <Form.Label>Last name</Form.Label>
-                      <Form.Control
-                        required
-                        type="text"
-                        name="lastName"
-                        value={form.lastName}
-                        onChange={handleChange}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please enter your last name.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                </Row>
+    <Container className="mt-4" style={{ maxWidth: "500px" }}>
+      <h3>Contact Us</h3>
 
-                <Row className="mb-3">
-                  <Col md={6}>
-                    <Form.Group controlId="contactPhone">
-                      <Form.Label>Phone</Form.Label>
-                      <Form.Control
-                        required
-                        type="tel"
-                        name="phone"
-                        value={form.phone}
-                        onChange={handleChange}
-                        pattern="^[0-9]{9,11}$"
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please enter a valid phone number (9-11 digits).
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group controlId="contactEmail">
-                      <Form.Label>Email</Form.Label>
-                      <Form.Control
-                        required
-                        type="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please enter a valid email.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                </Row>
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
 
-                <Form.Group controlId="contactAgree" className="mb-3">
-                  <Form.Check
-                    required
-                    name="agree"
-                    checked={form.agree}
-                    onChange={handleChange}
-                    label="I agree to be contacted."
-                    feedback="You must agree before submitting."
-                    feedbackType="invalid"
-                  />
-                </Form.Group>
+        <Form.Group className="mb-3" controlId="validationName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Your name"
+          />
+          <Form.Control.Feedback type="invalid">
+            Please enter your name.
+          </Form.Control.Feedback>
+        </Form.Group>
 
-                <div className="d-flex justify-content-end">
-                  <Button type="submit" variant="primary">
-                    Submit
-                  </Button>
-                </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+        <Form.Group className="mb-3" controlId="validationEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            required
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="example@gmail.com"
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid email.
+          </Form.Control.Feedback>
+        </Form.Group>
 
+        <Form.Group className="mb-3" controlId="validationMessage">
+          <Form.Label>Message</Form.Label>
+          <Form.Control
+            required
+            as="textarea"
+            rows={3}
+            name="message"
+            value={form.message}
+            onChange={handleChange}
+          />
+          <Form.Control.Feedback type="invalid">
+            Message cannot be empty.
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        {/* AGREE */}
+        <Form.Group className="mb-3">
+          <Form.Check
+            required
+            name="agree"
+            checked={form.agree}
+            onChange={handleChange}
+            label="Agree to terms and conditions"
+            feedback="You must agree before submitting."
+            feedbackType="invalid"
+          />
+        </Form.Group>
+
+        <Button type="submit">Submit</Button>
+      </Form>
+
+      {/* CONFIRM MODAL */}
       <ConfirmModal
-        show={showConfirm}
-        handleClose={() => setShowConfirm(false)}
-        title="Confirm submission"
+        show={show}
+        handleClose={() => setShow(false)}
+        title="Confirm Information"
         body={
-          <div>
-            <p className="mb-2">Please confirm your information:</p>
-            <ul className="mb-0">
-              <li>First name: {form.firstName}</li>
-              <li>Last name: {form.lastName}</li>
-              <li>Phone: {form.phone}</li>
-              <li>Email: {form.email}</li>
-              <li>Agree: {form.agree ? "Yes" : "No"}</li>
-            </ul>
-          </div>
+          <>
+            <p><b>Name:</b> {form.name}</p>
+            <p><b>Email:</b> {form.email}</p>
+            <p><b>Message:</b> {form.message}</p>
+          </>
         }
-        onConfirm={handleConfirm}
+        onConfirm={() => {
+          alert("Contact submitted successfully!");
+          setShow(false);
+        }}
       />
     </Container>
   );

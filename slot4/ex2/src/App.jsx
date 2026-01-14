@@ -1,38 +1,33 @@
-﻿import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import Anh from "../public/images/4n.jpg";
-import ListOfOrchid from "./components/ListOfOrchid";
-import listOrchids from "./data/listOrchids";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import OrchidDetail from "./pages/OrchidDetail";
+import Login from "./pages/Login";
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchText, setSearchText] = useState("");
+
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Header searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      <Header onSearch={setSearchText} />
 
-      <main className="flex-fill py-4">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div className="container">
-                <h1 className="text-center mb-4">WELCOME TO MY WEBSITE</h1>
-                <ListOfOrchid orchids={listOrchids} searchTerm={searchTerm} />
-              </div>
-            }
-          />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home searchText={searchText} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/orchid/:id" element={<OrchidDetail />} />
+      </Routes>
 
-      <Footer avatar={Anh} name="Tri" email="tri@fpt.edu.vn" />
+      <Footer
+        avatar="/images/kazuha-le-sserafim-3840x2160-21959.jpg"
+        name="tri"
+        email="tritvvde181@fpt.edu.vn"
+      />
     </div>
   );
 }

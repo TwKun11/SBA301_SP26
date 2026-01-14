@@ -1,22 +1,18 @@
-﻿import React from "react";
+import React from "react";
 import { Form } from "react-bootstrap";
 
-function SearchBar({
-  value,
-  onChange,
-  placeholder = "Search orchids...",
-  formClassName = "",
-}) {
+function SearchBar({ onSearch }) {
+  const handleSearchChange = (e) => {
+    onSearch(e.target.value);
+  };
+
   return (
-    <Form className={`mb-0 ${formClassName}`.trim()}>
-      <Form.Group controlId="searchOrchids" className="mb-0">
-        <Form.Label className="visually-hidden">Search</Form.Label>
+    <Form className="mb-4">
+      <Form.Group controlId="searchOrchid">
         <Form.Control
-          type="search"
-          value={value}
-          placeholder={placeholder}
-          onChange={(e) => onChange?.(e.target.value)}
-          size="sm"
+          type="text"
+          placeholder="Search orchid by name..."
+          onChange={handleSearchChange}
         />
       </Form.Group>
     </Form>

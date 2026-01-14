@@ -1,39 +1,28 @@
-function Footer({ avatar, name, email }) {
-  return (
-    <footer className="bg-dark text-light py-4 mt-auto w-100">
-      <div className="container-fluid px-4">
-        <div className="row align-items-center">
-          <div className="col-md-4 text-center mb-3 mb-md-0">
-            <img
-              src={avatar}
-              alt="Author avatar"
-              className="rounded-circle"
-              width="100"
-              height="100"
-            />
-          </div>
-
-          <div className="col-md-4 text-center text-md-start mb-3 mb-md-0">
-            <h5 className="mb-1">Tác giả: &copy;{name}</h5>
-            <p className="mb-0">Frontend Developer</p>
-          </div>
-
-          <div className="col-md-4 text-center text-md-start">
-            <h5 className="mb-1">Liên hệ</h5>
-
-            {/* Truncate + không xuống hàng */}
-            <a
-              href={`mailto:${email}`}
-              className="text-light text-decoration-none d-block text-truncate text-nowrap"
-              title={email}
-            >
-              {email}
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
+//Footer.jsx  to describe the footer component about the author
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+function Footer({avatar, name, email}) {
+    return (
+        //footer có background light và text center
+        <footer className="bg-light text-center py-4 mt-auto">
+        {/* Sử dụng Container để căn chỉnh nội dung footer, có 1 dòng, 3 cột: Avatar, Tên tác giả, Thông tin liên hệ */}
+        <Container fluid>
+            <Row className="align-items-center">
+                <Col xs={2}>
+                    <Image src={avatar} alt="Author Avatar" className="rounded-circle" style={{ width: '60px', height: '60px', objectFit: 'cover' }} />
+                </Col>
+                <Col xs={8}>
+                    <h5>Tác giả: &copy; {name}</h5>
+                    <small>All rights reserved.</small>
+                </Col>
+                <Col xs={2}>
+                    <a href={`mailto:${email}`}>{email}</a>    
+                </Col>
+            </Row>
+        </Container>
+        </footer>
+    );
+}   
 export default Footer;
