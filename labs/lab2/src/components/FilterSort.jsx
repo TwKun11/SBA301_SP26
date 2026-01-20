@@ -1,23 +1,13 @@
-﻿import React from "react";
+// FilterSort.jsx to filter and sort orchids
 import { Form, Row, Col } from "react-bootstrap";
 
-function FilterSort({
-  categories = [],
-  onFilterChange,
-  onSortChange,
-  selectedCategory = "",
-  selectedSort = "",
-}) {
+function FilterSort({ categories, onFilterChange, onSortChange }) {
   const handleFilterChange = (e) => {
-    if (onFilterChange) {
-      onFilterChange(e.target.value);
-    }
+    onFilterChange(e.target.value);
   };
 
   const handleSortChange = (e) => {
-    if (onSortChange) {
-      onSortChange(e.target.value);
-    }
+    onSortChange(e.target.value);
   };
 
   return (
@@ -26,11 +16,7 @@ function FilterSort({
         <Col md={6}>
           <Form.Group controlId="filterCategory">
             <Form.Label>Filter by Category</Form.Label>
-            <Form.Control
-              as="select"
-              value={selectedCategory}
-              onChange={handleFilterChange}
-            >
+            <Form.Control as="select" onChange={handleFilterChange}>
               <option value="">All Categories</option>
               {categories.map((category, index) => (
                 <option key={index} value={category}>
@@ -41,14 +27,11 @@ function FilterSort({
           </Form.Group>
         </Col>
 
+        {/* Sort Section by Price, by Name */}
         <Col md={6}>
           <Form.Group controlId="sortOrchids">
             <Form.Label>Sort by</Form.Label>
-            <Form.Control
-              as="select"
-              value={selectedSort}
-              onChange={handleSortChange}
-            >
+            <Form.Control as="select" onChange={handleSortChange}>
               <option value="">No Sorting</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>

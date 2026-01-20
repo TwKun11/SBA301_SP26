@@ -1,0 +1,106 @@
+.orchid-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border-radius: 12px;
+}
+
+.orchid-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.orchid-img {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.orchid-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #28a745;
+}
+.special-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+}
+.orchid-card {
+  width: 100%;
+}
+
+/* ===== RESPONSIVE ORCHID CARDS ===== */
+
+/* Mobile - Smaller cards */
+@media (max-width: 575.98px) {
+  .orchid-img {
+    height: 180px;
+  }
+
+  .orchid-card .card-body {
+    padding: 0.75rem;
+  }
+
+  .orchid-card .card-title {
+    font-size: 1rem;
+  }
+
+  .orchid-price {
+    font-size: 14px;
+  }
+
+  .special-badge {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .orchid-img {
+    height: 220px;
+  }
+
+  .orchid-card .card-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Desktop - Larger cards */
+@media (min-width: 992px) {
+  .orchid-img {
+    height: 250px;
+  }
+
+  .orchid-card:hover {
+    transform: translateY(-10px);
+  }
+}
+
+/* Grid adjustments */
+@media (max-width: 767.98px) {
+  /* 1 column on mobile */
+  .orchid-grid .col-md-6 {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* 2 columns on tablet */
+  .orchid-grid .col-md-6 {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  /* 3 columns on desktop */
+  .orchid-grid .col-lg-4 {
+    margin-bottom: 2rem;
+  }
+}

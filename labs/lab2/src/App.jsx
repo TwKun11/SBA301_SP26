@@ -1,39 +1,25 @@
-﻿import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Anh from "../public/images/4n.jpg";
-import ListOfOrchid from "./components/ListOfOrchid";
-import listOrchids from "./data/listOrchids";
+import { Routes, Route } from "react-router-dom";
+import MainLayout from "./components/MainLayout";
+import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import OrchidDetail from "./pages/OrchidDetail";
+import Login from "./pages/Login";
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchText, setSearchText] = useState("");
+
   return (
-    <div className="d-flex flex-column min-vh-100">
-      <Header searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-
-      <main className="flex-fill py-4">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div className="container">
-                <h1 className="text-center mb-4">WELCOME TO MY WEBSITE</h1>
-                <ListOfOrchid orchids={listOrchids} searchTerm={searchTerm} />
-              </div>
-            }
-          />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
-
-      <Footer avatar={Anh} name="Tri" email="tri@fpt.edu.vn" />
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route element={<MainLayout searchText={searchText} onSearchChange={setSearchText} />}>
+        <Route path="/" element={<Home searchText={searchText} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/orchid/:id" element={<OrchidDetail />} />
+      </Route>
+    </Routes>
   );
 }
 
