@@ -1,0 +1,54 @@
+# FU News Management System - Git Ignore
+
+# Backend (Spring Boot)
+asmBE/target/
+asmBE/.mvn/
+asmBE/mvnw
+asmBE/mvnw.cmd
+asmBE/.idea/
+asmBE/*.iml
+asmBE/*.iws
+asmBE/*.ipr
+asmBE/.settings/
+asmBE/.classpath
+asmBE/.project
+asmBE/bin/
+asmBE/build/
+asmBE/.gradle/
+
+# Frontend (React)
+asmFE/node_modules/
+asmFE/dist/
+asmFE/build/
+asmFE/.vite/
+asmFE/.env.local
+asmFE/.env.development.local
+asmFE/.env.test.local
+asmFE/.env.production.local
+asmFE/npm-debug.log*
+asmFE/yarn-debug.log*
+asmFE/yarn-error.log*
+asmFE/pnpm-debug.log*
+asmFE/.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite
+
+# Sensitive files
+application-local.properties
+.env

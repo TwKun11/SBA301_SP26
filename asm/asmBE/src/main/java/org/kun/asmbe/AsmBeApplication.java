@@ -1,0 +1,13 @@
+package org.kun.asmbe;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AsmBeApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(AsmBeApplication.class, args);
+    }
+
+}
